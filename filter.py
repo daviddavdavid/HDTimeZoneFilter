@@ -1,4 +1,7 @@
 import copy
+#There is one limitation to the program, if the timezones are -12 and 12 for example the program would regard them as the farthest away while the are close then you think
+#Here you fill in all the seniors in order, where the top one is most guaranteed to get an intern and the bottom one the least
+#The index (first value of the two) is the id of the senior (tag can work as well) and the second the timezone where the number x is gmt + x 
 senior_list = {
     "1": 1,
     "2": 3,
@@ -13,8 +16,6 @@ intern_list = {
     "7": -1,
     "6": 2
 }
-
-
 
 def sort_people(seniors_time, interns_time, people_per_senior):
     if len(seniors_time) * people_per_senior < len(interns_time):
@@ -48,6 +49,6 @@ def sort_people(seniors_time, interns_time, people_per_senior):
         
     return copy.deepcopy(couples)
 
-
+#fill the senior_list and intern list (instruction above) and the how much people you want as a senior in as the last value
 print(sort_people(senior_list, intern_list, 2))
 
