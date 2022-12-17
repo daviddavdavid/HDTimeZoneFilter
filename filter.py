@@ -17,7 +17,12 @@ intern_list = {
 
 
 def sort_people(seniors_time, interns_time, people_per_senior):
-    couples = []
+    if len(seniors_time) * people_per_senior < len(interns_time):
+        print("Error: there will be interns not assigned to seniors due to the amount of interns")
+        return
+
+
+    couples = {}
     couples.clear() #just to be sure
     for senior in seniors_time.items():
         pairing = []
@@ -33,7 +38,9 @@ def sort_people(seniors_time, interns_time, people_per_senior):
                         old_intern = dif_new_intern #I think this should work, if it doesn't ill do it w pairing itself
 
         d_pairing = copy.deepcopy(pairing)
-        couples.append(d_pairing)
+        assigned_senior = {senior[1]: d_pairing}
+        couples[senior[1]] = d_pairing
+        assigned_senior.clear()
 
         for paired_interns in d_pairing:
             interns_time.pop(paired_interns[0])
