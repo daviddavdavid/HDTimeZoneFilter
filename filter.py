@@ -3,18 +3,25 @@ import copy
 #Here you fill in all the seniors in order, where the top one is most guaranteed to get an intern and the bottom one the least
 #The index (first value of the two) is the id of the senior (tag can work as well) and the second the timezone where the number x is gmt + x 
 senior_list = {
-    "1": 1,
-    "2": 3,
-    "4": 5
+    "AzapTech#1749": -5,
+    "Dav#4642": 1, 
+    "Arcxion ◇#1580": 5.5,
+    "Vilksian#8607": -8,
+    "🆁🅴🅳 🅶🆄🆈#3266": 10
 }
 
 intern_list = {
-    "1": 5,
-    "2": 6,
-    "4": 5,
-    "3": 2,
-    "7": -1,
-    "6": 2
+    "NorthNern#0001": -8,
+    "Jose.#1354": 0,
+    "Aero#5055": 5.5,
+    "G2_iber1#0671": -5,
+    "khloris#7777": 8, 
+    "Erickk#5665": -8,
+    "Parradine#0001": 7,
+    "Eliante#6565": -5,
+    "Lochan#5949": -5,
+    "Hysteria#0006": 3,
+    #"muh man 2#3817": -6
 }
 
 def sort_people(seniors_time, interns_time, people_per_senior):
@@ -30,17 +37,19 @@ def sort_people(seniors_time, interns_time, people_per_senior):
         for intern in interns_time.items():
             if len(pairing) < people_per_senior:
                 pairing.append(intern)
+                print(intern)
             else:
                 for old_intern in pairing:
                     dif_new_intern = abs(senior[1] - intern[1])
                     dif_old_intern = abs(senior[1] - old_intern[1])
-
                     if dif_new_intern < dif_old_intern:
-                        old_intern = dif_new_intern #I think this should work, if it doesn't ill do it w pairing itself
+                        old_intern_index = pairing.index(old_intern)
+                        pairing[old_intern_index] = intern
+                        break
 
         d_pairing = copy.deepcopy(pairing)
         assigned_senior = {senior[1]: d_pairing}
-        couples[senior[1]] = d_pairing
+        couples[senior[0]] = d_pairing
         assigned_senior.clear()
 
         for paired_interns in d_pairing:
